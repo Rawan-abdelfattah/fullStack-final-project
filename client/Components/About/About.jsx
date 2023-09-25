@@ -13,7 +13,7 @@ export default function About() {
     <>
     
 
-    <div className="relative isolate overflow-hidden bg-gray-200 py-24 sm:py-32 mb-10">
+    <div className="relative isolate overflow-hidden bg-gray-400 py-24 sm:py-32 mb-10">
    
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"

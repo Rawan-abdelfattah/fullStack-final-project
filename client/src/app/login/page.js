@@ -1,14 +1,49 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Changepassword from "../../../Components/Changepassword/Changepassword";
 import './login.css'
+
+import Api from "../../config/api.js";
+import {
+  notifySuccess,
+  notifyError,
+} from "../../../Components/Notify/Notify.jsx";
+import { useRouter } from "next/navigation";
+import { fetchUserData } from "@/redux/reducers/user";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function login() {
-  function handleLogin(values) {
-    console.log(values);
-    formik.resetForm();
-  }
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  
+
+
+ async function handleLogin(values) {
+       setLoading(true);
+  
+    
+      await Api.post("/auth/login", values).then(()=>{
+        
+        notifySuccess("login successfully !!");
+       router.push("/");
+       setLoading(false);
+       dispatch(fetchUserData());  
+       formik.resetForm();
+       }).catch(error => {
+        setLoading(false);
+        let errorMessage =error?.response?.data?.message || error?.response?.data?.error;
+          
+        notifyError(errorMessage);
+
+       })
+    
+      }
+       
+
   let userSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is Required  !!"),
     password: Yup.string().required("Password is Required  !!"),
@@ -93,6 +128,7 @@ export default function login() {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
+              disabled={loading}
             >
               Login
             </button>
@@ -109,6 +145,8 @@ export default function login() {
         </p>
       </div>
     </div>    </div>
+
+
      </>
   );
 }

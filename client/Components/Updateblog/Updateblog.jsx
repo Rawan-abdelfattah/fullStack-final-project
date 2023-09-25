@@ -21,44 +21,36 @@ export default function FormDialog() {
   return (
     <div>
       <Button variant="text" onClick={handleClickOpen}>
-       Change Password
+       Update Blog
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Forrget Your Password !!</DialogTitle>
+        <DialogTitle>Update your Blog Now </DialogTitle>
         <DialogContent>
         <DialogContentText>
-            Change Your Password Now . 
+            Update Blog
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            id="oldPassword"
-            label="Old Password"
+            id="title"
+            label="title"
             type="text"
             fullWidth
             variant="standard"
           />
              <TextField
              margin="dense"
-            id="newPassword"
-            label="New Password"
+            id="content"
+            label="content"
             type="text"
             fullWidth
             variant="standard"
           />
-            <TextField
             
-            margin="dense"
-            id="confirmNewPassword"
-            label="Confirm New Password"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Change</Button>
+          <Button onClick={handleClose}>Update</Button>
         </DialogActions>
       </Dialog>
     </div>
